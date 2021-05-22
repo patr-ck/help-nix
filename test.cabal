@@ -1,0 +1,13 @@
+cabal-version:       >=1.10
+name:                test
+version:             0.1.0.0
+author:              Test
+maintainer:          test@test.test
+build-type:          Simple
+
+executable test
+  main-is:           Main.hs
+  build-depends:       base >=4.13
+                     , reflex
+                     , reflex-dom
+  default-language:   Haskell2010
