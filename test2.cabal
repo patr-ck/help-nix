@@ -1,11 +1,11 @@
 cabal-version:       >=1.10
-name:                test
+name:                test2
 version:             0.1.0.0
 author:              Test
 maintainer:          test@test.test
 build-type:          Simple
 
-executable test
+executable test2
   main-is:           Main.hs
   build-depends:       base >=4.13
                      , reflex
