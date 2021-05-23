@@ -2,16 +2,16 @@
   description = "testicles";
 
   inputs.haskellNix.url  = "github:input-output-hk/haskell.nix";
-  inputs.nixpkgs.follows = "haskellNix/nixpkgs-unstable";
+  inputs.nixpkgs.follows = "haskellNix/nixpkgs-2009";
   inputs.flake-utils.url = "github:numtide/flake-utils";
   
   outputs = { self, nixpkgs, haskellNix, flake-utils }:
-    flake-utils.lib.eachSystem [ "x86_64-linux" "x86_64-darwin" ] (system:
+    flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let
         overlays =
           [ haskellNix.overlay
             (final: prev: {
-              test = final.haskell-nix.project' {
+              test = final.haskell-nix.project {
                 src = ./.;
                 compiler-nix-name = "ghc8104";
               };
@@ -26,10 +26,7 @@
           devShell = pkgs.test.shellFor {
             tools = {
               cabal = "latest";
-              haskell-language-server = "latest";
-              hlint = "latest";
             };
-            buildInputs = with pkgs; [];
           };
         }
     );
