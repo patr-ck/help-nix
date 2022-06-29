@@ -9,10 +9,13 @@
     builtins.trace haskellNix (flake-utils.lib.eachSystem [ "x86_64-linux" ] (system:
       let
         overlays = [ haskellNix.overlay (final: prev: {
-	  test2 = final.haskell-nix.project' {
-	    src = ./.;
-	    compiler-nix-name = "ghc8104";
-          };
+        test2 = final.haskell-nix.project' {
+          src = ./.;
+          compiler-nix-name = "ghc8104";
+          modules = [
+            { packages.webkit2gtk3-javascriptcore.doHaddock = false; }
+          ];
+        };
 	}) ];
         pkgs = import nixpkgs { inherit system overlays; };
         flake = pkgs.test2.flake {};
